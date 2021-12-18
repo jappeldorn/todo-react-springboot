@@ -1,11 +1,11 @@
-package com.example.springboot;
+package com.todo;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.example.springboot.repository.TodoRepository;
-import com.example.springboot.service.TodoService;
-import com.example.springboot.service.TodoServiceImpl;
+import com.todo.repository.TodoRepository;
+import com.todo.service.TodoService;
+import com.todo.service.TodoServiceImpl;
 
 @Configuration
 public class ServiceBeanConfig {

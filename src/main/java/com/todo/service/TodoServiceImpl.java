@@ -1,4 +1,4 @@
-package com.example.springboot.service;
+package com.todo.service;
 
 import static java.lang.Boolean.FALSE;
 import static java.time.Instant.now;
@@ -9,8 +9,8 @@ import java.util.function.Predicate;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.example.springboot.entity.TodoEntity;
-import com.example.springboot.repository.TodoRepository;
+import com.todo.entity.TodoEntity;
+import com.todo.repository.TodoRepository;
 
 import lombok.RequiredArgsConstructor;
 

@@ -8,11 +8,11 @@
 		<version>2.5.7</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>spring-boot</artifactId>
+	<groupId>com.todo</groupId>
+	<artifactId>todo-example-react-spring-boot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-boot</name>
-	<description>Demo project for Spring Boot</description>
+	<name>react-spring-boot-todo</name>
+	<description>TODO Demo application using React and Spring Boot</description>
 	
 	<properties>
 		<java.version>1.8</java.version>

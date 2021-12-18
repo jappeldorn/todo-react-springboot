@@ -1,4 +1,4 @@
-package com.example.springboot.service;
+package com.todo.service;
 
 import static java.util.Optional.ofNullable;
 
@@ -13,7 +13,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
-import com.example.springboot.entity.TodoEntity;
+import com.todo.entity.TodoEntity;
 
 
 @Validated

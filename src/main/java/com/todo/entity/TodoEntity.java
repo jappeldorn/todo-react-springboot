@@ -1,4 +1,4 @@
-package com.example.springboot.entity;
+package com.todo.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

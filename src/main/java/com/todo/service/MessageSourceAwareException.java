@@ -1,4 +1,4 @@
-package com.example.springboot.service;
+package com.todo.service;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

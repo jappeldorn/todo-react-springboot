@@ -1,4 +1,4 @@
-package com.example.springboot.controller;
+package com.todo.controller;
 
 import static org.springframework.data.domain.Pageable.unpaged;
 import static org.springframework.http.HttpStatus.CREATED;
@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.springboot.entity.TodoEntity;
-import com.example.springboot.service.TodoService;
+import com.todo.entity.TodoEntity;
+import com.todo.service.TodoService;
 
 import lombok.RequiredArgsConstructor;
 
