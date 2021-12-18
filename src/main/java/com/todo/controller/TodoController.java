@@ -34,29 +34,29 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/api/todo")
 public class TodoController {
-	
+
 	private final TodoService service;
-    
-    @PostMapping()
-    public ResponseEntity<?> postTodo(@RequestBody @Valid TodoEntity entity) {
-    	service.create(entity);
-    	return status(CREATED).build();
-    }
-	
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> updateTodo(@PathVariable String id, @RequestBody @Valid TodoEntity entity) {
-    	service.update(entity, id);
-    	return noContent().build();
-    }
-    
-    @DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteTodo(@PathVariable String id) {
-    	service.delete(id);
+
+	@PostMapping()
+	public ResponseEntity<?> postTodo(@RequestBody @Valid TodoEntity entity) {
+		service.create(entity);
+		return status(CREATED).build();
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<Void> updateTodo(@PathVariable String id, @RequestBody @Valid TodoEntity entity) {
+		service.update(entity, id);
 		return noContent().build();
 	}
-    
-    @GetMapping()
-    public Page<TodoEntity> retrieveTodos() {    
-    	return service.retrievePage(unpaged());
-    }
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteTodo(@PathVariable String id) {
+		service.delete(id);
+		return noContent().build();
+	}
+
+	@GetMapping()
+	public Page<TodoEntity> retrieveTodos() {
+		return service.retrievePage(unpaged());
+	}
 }
