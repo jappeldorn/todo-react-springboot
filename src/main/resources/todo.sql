@@ -1,0 +1,1 @@
+INSERT INTO todo (id, item, isComplete) VALUES (1, 'Create TODO Application', false);
