@@ -12,5 +12,9 @@ import com.todo.entity.TodoEntity;
 public interface TodoRepository extends PagingAndSortingRepository<TodoEntity, Serializable> {
 	
 	Optional<Boolean> existsByItem(String item);
+	
+	long countByComplete(Boolean complete);
+	
+	long countByPriority(Integer priority);
 
 }

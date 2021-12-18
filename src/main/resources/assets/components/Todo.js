@@ -1,21 +1,22 @@
 import React from "react";
+import classnames from 'classnames';
+import { DateTime } from 'luxon';
 
-function Todo({ todo, index, completeTodo, removeTodo, readOnly }) {
-	return (
-		<label
-			className="list-group-item d-flex gap-2"
-			style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}
-		>
-			<input onClick={() => completeTodo(index)} class="form-check-input flex-shrink-0"  disabled={readOnly} type="checkbox" checked={todo.isCompleted} />
-			<span className="text-muted">
-				{todo.text}
-			</span>	
-			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-danger bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
-				<path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z"/>
-			</svg>			
-			{ !readOnly ? <button className='btn btn-sm btn-close d-flex justify-content-end' onClick={() => removeTodo(index)} aria-label="Close" /> : null }
-		</label>	
-	);
-}
+const Todo = ({ todo, index, completeTodo, removeTodo, readOnly }) => (
+	<a href="/#" className={classnames('list-group-item list-group-item-action', { 'opacity-50 text-decoration-line-through bg-light' : todo.complete })}>
+			<div className='d-flex w-100 justify-content-between'>
+				<h5 class="mb-1">
+					<input onClick={() => completeTodo(index)} class="form-check-input flex-shrink-0"  disabled={readOnly} type="checkbox" checked={todo.complete} />
+					<span className='p-2'>{todo.item}</span>
+				</h5>
+				<small>{ !readOnly ? <button className='btn btn-sm btn-close d-flex justify-content-end' onClick={() => removeTodo(index)} aria-label="Close" /> : null }</small>
+			</div>
+			<p className='mb-1'><small className="text-muted opacity-75">{DateTime.fromMillis(todo.updateDateTime || todo.createDateTime).toLocaleString(DateTime.DATETIME_FULL)}</small></p>
+					
+			{ todo.priority !== 1 ? 
+				<small>
+					<span className={classnames('badge opacity-75', { 'bg-danger': todo.priority === 2}, {'bg-info': todo.priority === 0})}>{todo.priority === 2 ? 'Urgent' : 'Low Priority'}</span></small> : null }
+		</a>
+);
 
 export default Todo;

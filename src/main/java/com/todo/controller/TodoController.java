@@ -1,13 +1,17 @@
 package com.todo.controller;
 
-import static org.springframework.data.domain.Pageable.unpaged;
+import static java.lang.Boolean.TRUE;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.ResponseEntity.noContent;
+import static org.springframework.http.ResponseEntity.ok;
 import static org.springframework.http.ResponseEntity.status;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,15 +42,13 @@ public class TodoController {
 	private final TodoService service;
 
 	@PostMapping()
-	public ResponseEntity<?> postTodo(@RequestBody @Valid TodoEntity entity) {
-		service.create(entity);
-		return status(CREATED).build();
+	public ResponseEntity<TodoEntity> postTodo(@RequestBody @Valid TodoEntity entity) {
+		return status(CREATED).body(service.create(entity));
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> updateTodo(@PathVariable String id, @RequestBody @Valid TodoEntity entity) {
-		service.update(entity, id);
-		return noContent().build();
+	public ResponseEntity<TodoEntity> updateTodo(@PathVariable String id, @RequestBody @Valid TodoEntity entity) {
+		return ok(service.update(entity, id));
 	}
 
 	@DeleteMapping("/{id}")
@@ -56,7 +58,19 @@ public class TodoController {
 	}
 
 	@GetMapping()
-	public Page<TodoEntity> retrieveTodos() {
-		return service.retrievePage(unpaged());
+	public Iterable<TodoEntity> retrieveSortedTodos() {
+		return service.retrieveSorted(Sort.by(Sort.Direction.DESC, "priority"));
+	}
+	
+	@GetMapping("/counts")
+	public Map<String, Long> retrieveCounts() {	
+		Map<String, Long> counts = new HashMap<>();
+		long totalCount = service.count();
+		counts.put("all", totalCount);
+		long completedCount = service.countByComplete(TRUE);
+		counts.put("complete", completedCount);
+		counts.put("outstanding", totalCount - completedCount);
+		counts.put("urgent", service.countByPriority(2));
+		return counts;
 	}
 }

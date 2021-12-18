@@ -19,14 +19,24 @@ public class TodoServiceImpl implements TodoService {
 
 	private final TodoRepository repository;
 
-	private static final String TODO_ITEM_CONFLICT_MESSAGE = "todo.item.conflict.message";
+	static final String TODO_ITEM_CONFLICT_MESSAGE = "todo.item.conflict.message";
 
-	private static final Predicate<? super Boolean> EXISTS = exists -> !exists;
+	static final Predicate<? super Boolean> EXISTS = exists -> !exists;
 
 	@Override
 	public PagingAndSortingRepository<TodoEntity, Serializable> getRepository() {
 		return repository;
 	}
+	
+	
+	public long countByComplete(Boolean complete) {
+		return repository.countByComplete(complete);
+	}
+	
+	public long countByPriority(Integer priority) {
+		return repository.countByPriority(priority);
+	}
+
 
 	@Override
 	public TodoEntity create(TodoEntity entity) {
@@ -36,13 +46,13 @@ public class TodoServiceImpl implements TodoService {
 				.orElseThrow(() -> new MessageSourceAwareException(TODO_ITEM_CONFLICT_MESSAGE, item));
 
 		Boolean complete = ofNullable(entity.complete()).orElse(FALSE);
-		Integer priority = ofNullable(entity.priority()).orElse(0);
+		Integer priority = ofNullable(entity.priority()).orElse(1);
 
 		return repository.save(entity.complete(complete).priority(priority).createDateTime(now().toEpochMilli()));
 	}
 
 	@Override
-	public void update(TodoEntity entity, String id) {
+	public TodoEntity update(TodoEntity entity, String id) {
 		String item = entity.item();
 		
 		TodoEntity currentEntity = retrieveRequired(id);
@@ -55,7 +65,7 @@ public class TodoServiceImpl implements TodoService {
 		Boolean complete = ofNullable(entity.complete()).orElse(FALSE);
 		Integer priority = ofNullable(entity.priority()).orElse(0);
 
-		repository.save(currentEntity.item(item).complete(complete).priority(priority)
+		return repository.save(currentEntity.item(item).complete(complete).priority(priority)
 				.updateDateTime(now().toEpochMilli()));
 	}
 

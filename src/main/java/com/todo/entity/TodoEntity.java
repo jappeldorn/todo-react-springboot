@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -37,6 +38,7 @@ public class TodoEntity {
 	
 	private Integer priority;
 	
+//	@NotBlank(message = "{todo.item.blank.error}")
 	private String item;
 	
 	private Boolean complete;

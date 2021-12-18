@@ -42,3 +42,7 @@ form input {
     border: 1px solid #e3e3e3;
     text-indent: 23px;
 }
+
+.dropdown-menu.show {
+    top: 50px;
+}

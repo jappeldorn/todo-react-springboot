@@ -14,5 +14,4 @@ public class ServiceBeanConfig {
 	public TodoService todoService(TodoRepository repo) {
 		return new TodoServiceImpl(repo);
 	}
-
 }
