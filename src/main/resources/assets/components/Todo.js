@@ -2,13 +2,13 @@ import React from 'react';
 import classnames from 'classnames';
 import { DateTime } from 'luxon';
 
-const Todo = ({ todo, index, completeTodo, removeTodo, readOnly }) => (
-	<a href='/#' className={classnames('list-group-item list-group-item-action', { 'opacity-50 text-decoration-line-through bg-light' : todo.complete })}>
+const Todo = ({ todo, index, completeTodo, removeTodo, readOnly, theme }) => (
+	<a href='/#' className={classnames('list-group-item list-group-item-action', { 'opacity-50 text-decoration-line-through bg-light' : todo.complete }, { 'bg-dark text-white' : theme === 'dark'})}>
 			<div className='d-flex w-100 justify-content-between'>
 				<h5 class='mb-1'>
 					<input 
 						onClick={() => completeTodo(index)} 
-						className='form-check-input flex-shrink-0'
+						className={classnames('form-check-input flex-shrink-0', { 'bg-dark' : theme === 'dark' })}
 						disabled={readOnly}
 						type='checkbox'
 						checked={todo.complete}
@@ -16,7 +16,7 @@ const Todo = ({ todo, index, completeTodo, removeTodo, readOnly }) => (
 					<span className='p-2'>{todo.item}</span>
 				</h5>
 				<small>{ !readOnly 
-					? <button className='btn btn-sm btn-close d-flex justify-content-end' onClick={() => removeTodo(index)} aria-label='Close' /> 
+					? <button className={classnames('btn btn-sm btn-close d-flex justify-content-end', { 'text-white' : theme === 'dark' })} onClick={() => removeTodo(index)} aria-label='Close' /> 
 					: null }
 				</small>
 			</div>

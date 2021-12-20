@@ -7,7 +7,7 @@ const COLORS = {
   'Urgent': '#dc3545'
 };
 
-function ProgressChart ({ data, onClickChartItem }) {
+function ProgressChart ({ data, onClickChartItem, theme }) {
 
     const [activeIndex, setActiveIndex] = useState('');
 
@@ -94,7 +94,7 @@ function ProgressChart ({ data, onClickChartItem }) {
                 height={30}>
             </Legend>
             <Pie {...pieProps} >
-              <Label fontSize={40} position='center' value={allEmpty ? 'No Tasks' : 'Tasks'} />
+              { theme === 'dark' ? null : <Label fontSize={40} position='center' value={allEmpty ? 'No Tasks' : 'Tasks'} />}
               {data.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[entry.name]} />
               ))}

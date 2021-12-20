@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
 
-const TodoForm = ({ addTodo }) =>  {
+const TodoForm = ({ addTodo, theme }) =>  {
 	
 	const priorityMap = {
 		0: 'Low',
@@ -49,7 +49,7 @@ const TodoForm = ({ addTodo }) =>  {
 				</ul>				
 				<input
 					type='text'
-					className='form-control form-control-lg'
+					className={classnames('form-control form-control-lg', { 'bg-dark' : theme === 'dark'})}
 					value={value}
 					onChange={e => setValue(e.target.value)}
 					aria-label='Enter task'
