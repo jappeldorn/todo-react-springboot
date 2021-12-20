@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.todo.entity.TodoEntity;
@@ -58,12 +60,14 @@ public class TodoController {
 	}
 
 	@GetMapping()
-	public Iterable<TodoEntity> retrieveSortedTodos() {
-		return service.retrieveSorted(Sort.by(Sort.Direction.DESC, "priority"));
+	public Iterable<TodoEntity> retrieveSortedTodos(@RequestParam String sortDirection) {
+		return service.retrieveSorted(
+				Sort.by(sortDirection.isEmpty() || sortDirection.equalsIgnoreCase("desc") ? Sort.Direction.DESC
+						: Sort.Direction.ASC, "priority"));
 	}
-	
+
 	@GetMapping("/counts")
-	public Map<String, Long> retrieveCounts() {	
+	public Map<String, Long> retrieveCounts() {
 		Map<String, Long> counts = new HashMap<>();
 		long totalCount = service.count();
 		counts.put("all", totalCount);
