@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer, Legend, Label } from 'recharts';
 
+const COLORS = {
+  'Completed': '#0d6efd',
+  'Outstanding': '#ffc107',
+  'Urgent': '#dc3545'
+};
 
-const COLORS = ['#0088FE', '#6c757d', '#EF5D28', '#FFBB28'];
+function ProgressChart ({ data, onClickChartItem }) {
 
-function ProgressChart ({ data }) {
+    const [activeIndex, setActiveIndex] = useState('');
 
-    const [activeIndex, setActiveIndex] = useState("");
-
-    const onClickActiveItem = () => {
-        setActiveIndex(activeIndex -1)
+    const onClickActiveItem = (index) => {
+      if (activeIndex === index) {
+          setActiveIndex(-1)
+      } else {
+        setActiveIndex(index)
+      }       
     }
 
     const onClickItem = (item, i) => {
       if (activeIndex !== i) {
           setActiveIndex(i);
+          onClickChartItem(item)
+      } else {
+        onClickChartItem({name: null});
       }
     }
 
@@ -84,9 +94,9 @@ function ProgressChart ({ data }) {
                 height={30}>
             </Legend>
             <Pie {...pieProps} >
-              <Label fontSize={40} position='center' value='No Tasks' />
+              <Label fontSize={40} position='center' value={allEmpty ? 'No Tasks' : 'Tasks'} />
               {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                <Cell key={`cell-${index}`} fill={COLORS[entry.name]} />
               ))}
             </Pie>
             

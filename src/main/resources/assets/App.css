@@ -46,3 +46,7 @@ form input {
 .dropdown-menu.show {
     top: 50px;
 }
+
+.dropdown-menu.user-dropdown {
+    margin-left: -60px;
+}

@@ -34,7 +34,7 @@ public class TodoServiceImpl implements TodoService {
 	}
 	
 	public long countByPriority(Integer priority) {
-		return repository.countByPriority(priority);
+		return repository.countByPriorityAndComplete(priority, FALSE);
 	}
 
 

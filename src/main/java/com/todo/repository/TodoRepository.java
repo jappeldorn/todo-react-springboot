@@ -15,6 +15,6 @@ public interface TodoRepository extends PagingAndSortingRepository<TodoEntity, S
 	
 	long countByComplete(Boolean complete);
 	
-	long countByPriority(Integer priority);
+	long countByPriorityAndComplete(Integer priority, Boolean complete);
 
 }

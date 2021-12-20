@@ -1,0 +1,40 @@
+= TODO Application using React + Spring Boot
+
+This TODO application was built using the create-react-app folder structure, ReactJS and wrapped with Spring Boot.
+
+== Installation and Getting Started
+To run this application you will need: 
+
+* https://www.oracle.com/java/technologies/downloads/[JDK 1.8] or later
+
+* https://maven.apache.org/download.cgi[Maven 3.2+]
+
+https://github.com/jappeldorn/todo-react-springboot/archive/refs/heads/main.zip[Download] and unzip the source repository, or cloine it using Git:
+
+[indent=0]
+----
+	git clone https://github.com/jappeldorn/todo-react-springboot.git
+----
+ 
+cd into the unzipped source directory and execute the command: 
+
+[indent=0]
+----
+	$ ./mvnw spring-boot:run
+----
+
+=== Running the Application
+This application is secured using spring-security.  Two users are setup, one with read-only access and another that has full admin access.  
+
+Users: 
+
+[indent=0]
+----
+	user/password (read-only user)
+----
+
+[indent=0]
+----
+	admin/password 
+----
+
