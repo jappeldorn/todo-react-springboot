@@ -84,7 +84,7 @@ const TodoForm = ({ addTodo, theme }) => {
         <input
           type='text'
           className={classnames('form-control form-control-lg', {
-            'bg-dark': theme === 'dark',
+            'bg-dark text-white': theme === 'dark',
           })}
           value={value}
           onChange={(e) => setValue(e.target.value)}
